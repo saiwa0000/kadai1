@@ -49,7 +49,6 @@ public class WordListDAO {
     
     public static void Add(int ID, String English, String Japanese){
         try{
-            Class.forName("org.sqlite.JDBC");
             Connection con = null;
             con = DriverManager.getConnection("jdbc:sqlite:KADAI1DB");
             PreparedStatement ps = con.prepareStatement("insert into wordlist values(?,?,?,0)");
@@ -72,20 +71,17 @@ public class WordListDAO {
 
     public static List<WordList> AddList(List<WordList> wlist){
         try{
-            Class.forName("org.sqlite.JDBC");
             Connection con = null;
             con = DriverManager.getConnection("jdbc:sqlite:KADAI1DB");
 
-            int n = 1;
             for(int i=0; i<wlist.size(); i++){
                 if(checkList(wlist.get(i))){
                     PreparedStatement pstmt = con.prepareStatement("insert into wordlist values(?,?,?,?)");
                     if(checkID(wlist.get(i).id)){
                         pstmt.setInt(1, wlist.get(i).id);
                     }else{
-                        pstmt.setInt(1, maxID() + n);
-                        wlist.get(i).id = maxID() + n;
-                        n++;
+                        pstmt.setInt(1, maxID() + 1);
+                        wlist.get(i).id = maxID() + 1;
                     }
                     pstmt.setString(2, wlist.get(i).english);
                     pstmt.setString(3, wlist.get(i).japanese);
@@ -126,11 +122,14 @@ public class WordListDAO {
     public static boolean checkList(WordList w){
         List<WordList> wlist = WordListDAO.findAll();
         for(int i=0; i<wlist.size(); i++){
-            if(wlist.get(i).id == w.id && wlist.get(i).english.equals(w.english))
-                return false;
-            else if(wlist.get(i).id == w.id && wlist.get(i).japanese.equals(w.japanese))
-                return false;
-            else if(wlist.get(i).english.equals(w.english) && wlist.get(i).japanese.equals(w.japanese))
+            int count = 0;
+            if(wlist.get(i).id == w.id)
+                count++;
+            else if(wlist.get(i).english.equals(w.english))
+                count++;
+            else if(wlist.get(i).japanese.equals(w.japanese))
+                count++;
+            if(count > 1)
                 return false;
         }
         return true;
@@ -138,7 +137,6 @@ public class WordListDAO {
 
     public static void Delete(int ID){
         try{
-            Class.forName("org.sqlite.JDBC");
             Connection con = null;
             con = DriverManager.getConnection("jdbc:sqlite:KADAI1DB");
             PreparedStatement ps = con.prepareStatement("delete from wordlist where id=?");
@@ -154,7 +152,6 @@ public class WordListDAO {
     }
     public static void DeleteAll(){
         try{
-            Class.forName("org.sqlite.JDBC");
             Connection con = null;
             con = DriverManager.getConnection("jdbc:sqlite:KADAI1DB");
             PreparedStatement ps = con.prepareStatement("delete from wordlist");
@@ -176,7 +173,6 @@ public class WordListDAO {
         }
 
         try{
-            Class.forName("org.sqlite.JDBC");
             Connection con = null;
             con = DriverManager.getConnection("jdbc:sqlite:KADAI1DB");
             PreparedStatement ps = con.prepareStatement("delete from wordlist");
@@ -211,7 +207,6 @@ public class WordListDAO {
     //要素を追加してないときの保存
     public static void Save(List<WordList> wlist){
         try{
-            Class.forName("org.sqlite.JDBC");
             Connection con = null;
             con = DriverManager.getConnection("jdbc:sqlite:KADAI1DB");
             for(int i=0; i<wlist.size(); i++){
