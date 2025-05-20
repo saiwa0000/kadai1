@@ -22,6 +22,9 @@ public class SearchWordTester {
         System.out.println(searchedWordS.get(0).english);
         System.out.println(searchedWordS.get(1).english);
         assertEquals(searchedWordE.get(0).english, "apple");
+        assertEquals(searchedWordJ.get(0).english, "apple");
+        assertEquals(searchedWordS.get(0).english, "apple");
+        assertEquals(searchedWordS.get(1).english, "sing");
 
     }
 }
