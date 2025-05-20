@@ -17,9 +17,19 @@ public class QuizMakerTest {
         wl.add(new WordList(11, "play", "あそぶ", 1));
         wl.add(new WordList(12, "study", "勉強する", 5));
 
-        ArrayList<WordList> resultlist = QuizMaker.PrioritizeLowScore(wl, 5);
+        ArrayList<WordList> resultlist = QuizMaker.MakeQuiz(wl);
         for(int i=0;i<resultlist.size();i++){
             resultlist.get(i).ToString();
+        }
+        System.out.println("----------------");
+        ArrayList<WordList> resultlist2 = QuizMaker.MakeQuiz(wl);
+        for(int i=0;i<resultlist2.size();i++){
+            resultlist2.get(i).ToString();
+        }
+        System.out.println("----------------");
+        ArrayList<WordList> resultlist3 = QuizMaker.MakeQuiz(wl);
+        for(int i=0;i<resultlist3.size();i++){
+            resultlist3.get(i).ToString();
         }
     }
 }
