@@ -2,6 +2,16 @@
 import java.sql.*;
 import java.util.*;
 
+/*メソッド一覧
+findAll()　　　　　　　　　データベースをリストに入れて返す。
+Add(int, String, String)　　データベースに要素を追加する。
+AddList(List<WordList>)　　リストから足りないものをデータベースに追加する。
+maxID()　　　　　　　　　　IDの最大値を返す。
+Delete(int)　　　　　　　　指定したIDの要素を消してデータベースのIDを詰める。
+Sort()　　　　　　　　　　データベースをIDでソートして空きを詰める。
+SaveAll(List<WordList>)　　データベースにリストの要素を完全に保存する。　
+Save(List<WordList>)　　　　データベースにリストでの変更を適応させる。
+ */
 
 public class WordListDAO {
     public static List<WordList> findAll(){
