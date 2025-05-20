@@ -64,6 +64,7 @@ public class WordListDAO {
             
             ps.close();
             con.close();
+            Sort();
         }catch(Exception e){
             e.printStackTrace();
         }
