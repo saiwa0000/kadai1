@@ -8,6 +8,9 @@ public class WordListDAOTest {
         System.out.println("1");
 
         wlist.add( new WordList(1, "one", "壱", 0));
+        wlist.add( new WordList(76, "four", "四", 0));
+        wlist.add( new WordList(13, "two", "に", 0));
+        wlist.add( new WordList(42, "three", "サン", 0));
 
         for(int i=0; i<wlist.size(); i++){
             wlist.get(i).ToString();
@@ -27,7 +30,7 @@ public class WordListDAOTest {
             wlist2.get(i).ToString();
         }
 
-        WordListDAO.Delete(1);
+        WordListDAO.DeleteAll();
     }
 
     
