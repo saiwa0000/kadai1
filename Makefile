@@ -6,7 +6,7 @@ JAVA	= java -cp ./:sqlite-jdbc-3.30.1.jar
 SRC	= $(wildcard *.java)
 CLASS	= $(SRC:.java=.class)
 PROGRAM	= $(shell pwd)
-MAIN	= WordListDAOTest
+MAIN	= #WordListDAOTest
 
 all: $(CLASS)
 
