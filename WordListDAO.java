@@ -71,4 +71,31 @@ public class WordListDAO {
         }
     }
 
+    public static void Save(List<WordList> wlist){
+        try{
+            Class.forName("org.sqlite.JDBC");
+            Connection con = null;
+            con = DriverManager.getConnection("jdbc:sqlite:KADAI1DB");
+            PreparedStatement ps = con.prepareStatement("delete from wordlist");
+            ps.executeUpdate();
+            
+            ps.close();
+            
+            for(int i=0; i<wlist.size(); i++){
+                PreparedStatement pstmt = con.prepareStatement("insert into wordlist values(?,?,?,?)");
+                pstmt.setInt(1, wlist.get(i).id);
+                pstmt.setString(2, wlist.get(i).english);
+                pstmt.setString(3, wlist.get(i).japanese);
+                pstmt.setInt(4, wlist.get(i).score);
+                pstmt.executeUpdate();
+            
+                pstmt.close();
+            }
+
+            con.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }

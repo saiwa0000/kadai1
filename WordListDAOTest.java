@@ -7,28 +7,27 @@ public class WordListDAOTest {
 
         System.out.println("1");
 
-        for(int i=0; i<wlist.size(); i++){
-            wlist.get(i).ToString();
-        }
-
-        System.out.println("1");
-
-        WordListDAO.Add(1, "one", "いち");
-
-        wlist = WordListDAO.findAll(); 
+        wlist.add( new WordList(1, "one", "壱", 0));
 
         for(int i=0; i<wlist.size(); i++){
             wlist.get(i).ToString();
         }
 
         System.out.println("1");
+
+        WordListDAO.Save(wlist);
+
+
+        List<WordList> wlist2 = WordListDAO.findAll(); 
+
+        System.out.println("1");
+
+
+        for(int i=0; i<wlist2.size(); i++){
+            wlist2.get(i).ToString();
+        }
 
         WordListDAO.Delete(1);
-        wlist = WordListDAO.findAll(); 
-
-        for(int i=0; i<wlist.size(); i++){
-            wlist.get(i).ToString();
-        }
     }
 
     
