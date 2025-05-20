@@ -1,15 +1,13 @@
 import java.sql.*;
 
-public class AddWord {
-    public void Add(int ID, String English, String Japanese){
+public class DeleteWord {
+    public void Delete(int ID){
         try{
             Class.forName("org.sqlite.JDBC");
             Connection con = null;
             con = DriverManager.getConnection("jdbc:sqlite:KADAI1DB");
-            PreparedStatement ps = con.prepareStatement("insert into wordlist values(?,?,?,0)");
+            PreparedStatement ps = con.prepareStatement("delete from wordlist where id=?");
             ps.setInt(1, ID);
-            ps.setString(2, English);
-            ps.setString(3, Japanese);
             ps.executeUpdate();
             
             ps.close();
