@@ -32,4 +32,16 @@ public class QuizMaker {
 
         return returnlist;
     }
+    public static ArrayList<WordList> SpecifyScore(ArrayList<WordList> wl,int size,int score){
+        ArrayList<WordList> list = new ArrayList<>(SearchWord.byScore(wl,score));
+        if(list.size()>size){
+            for(int i=0;i < size;i++){
+                Random rand = new Random();
+                int a = rand.nextInt(list.size());
+                returnlist.add(list.remove(a));
+                
+            }
+        }
+        return returnlist;
+    }
 }
