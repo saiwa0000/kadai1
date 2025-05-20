@@ -43,7 +43,11 @@ public class WordListDAO {
             Connection con = null;
             con = DriverManager.getConnection("jdbc:sqlite:KADAI1DB");
             PreparedStatement ps = con.prepareStatement("insert into wordlist values(?,?,?,0)");
-            ps.setInt(1, ID);
+            if(checkID(ID)){
+                ps.setInt(1, ID);
+            }else{
+                ps.setInt(1, maxID()+1);
+            }
             ps.setString(2, English);
             ps.setString(3, Japanese);
             ps.executeUpdate();
