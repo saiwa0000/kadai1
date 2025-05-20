@@ -6,7 +6,7 @@ import java.util.*;
 public class WordListDAO {
     public static List<WordList> findAll(){
         Connection con = null;
-        List<WordList> list =new ArrayList<WordList>();
+        List<WordList> list = new ArrayList<WordList>();
         try{
             Class.forName("org.sqlite.JDBC");
             
@@ -36,6 +36,89 @@ public class WordListDAO {
         }
         return list;
     }
-
     
+    public static void Add(int ID, String English, String Japanese){
+        try{
+            Class.forName("org.sqlite.JDBC");
+            Connection con = null;
+            con = DriverManager.getConnection("jdbc:sqlite:KADAI1DB");
+            PreparedStatement ps = con.prepareStatement("insert into wordlist values(?,?,?,0)");
+            ps.setInt(1, ID);
+            ps.setString(2, English);
+            ps.setString(3, Japanese);
+            ps.executeUpdate();
+            
+            ps.close();
+            con.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void Delete(int ID){
+        try{
+            Class.forName("org.sqlite.JDBC");
+            Connection con = null;
+            con = DriverManager.getConnection("jdbc:sqlite:KADAI1DB");
+            PreparedStatement ps = con.prepareStatement("delete from wordlist where id=?");
+            ps.setInt(1, ID);
+            ps.executeUpdate();
+            
+            ps.close();
+            con.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    public static void DeleteAll(){
+        try{
+            Class.forName("org.sqlite.JDBC");
+            Connection con = null;
+            con = DriverManager.getConnection("jdbc:sqlite:KADAI1DB");
+            PreparedStatement ps = con.prepareStatement("delete from wordlist");
+            ps.executeUpdate();
+            
+            ps.close();
+            con.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void preSave(List<WordList> wlist){
+        
+    }
+
+    public static void Save(List<WordList> wlist){
+        Collections.sort(wlist);
+        for(int i=0; i<wlist.size(); i++){
+            if(wlist.get(i).id != i+1)
+                wlist.get(i).id = i+1;
+        }
+
+        try{
+            Class.forName("org.sqlite.JDBC");
+            Connection con = null;
+            con = DriverManager.getConnection("jdbc:sqlite:KADAI1DB");
+            PreparedStatement ps = con.prepareStatement("delete from wordlist");
+            ps.executeUpdate();
+            
+            ps.close();
+            
+            for(int i=0; i<wlist.size(); i++){
+                PreparedStatement pstmt = con.prepareStatement("insert into wordlist values(?,?,?,?)");
+                pstmt.setInt(1, wlist.get(i).id);
+                pstmt.setString(2, wlist.get(i).english);
+                pstmt.setString(3, wlist.get(i).japanese);
+                pstmt.setInt(4, wlist.get(i).score);
+                pstmt.executeUpdate();
+            
+                pstmt.close();
+            }
+
+            con.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 }
