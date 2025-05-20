@@ -18,19 +18,35 @@ public class WordListDAOTest {
 
         System.out.println("1");
 
-        WordListDAO.Save(wlist);
+        WordListDAO.SaveAll(wlist);
 
 
         List<WordList> wlist2 = WordListDAO.findAll(); 
 
         System.out.println("1");
 
+        List<WordList> wlist3 = new ArrayList<>();
+        wlist3.add(wlist2.get(1));
 
-        for(int i=0; i<wlist2.size(); i++){
-            wlist2.get(i).ToString();
+
+        for(int i=0; i<wlist3.size(); i++){
+            wlist3.get(i).score ++;
+            wlist3.get(i).ToString();
         }
 
-        WordListDAO.DeleteAll();
+        System.out.println("1");
+
+        WordListDAO.Save(wlist3);
+
+        List<WordList> wlist4 = WordListDAO.findAll();
+
+        System.out.println("1");
+
+        for(int i=0; i<wlist4.size(); i++){
+            wlist4.get(i).ToString();
+        }
+
+        System.out.println("1");
     }
 
     
