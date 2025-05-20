@@ -70,8 +70,32 @@ public class WordListDAO {
             e.printStackTrace();
         }
     }
+    public static void DeleteAll(){
+        try{
+            Class.forName("org.sqlite.JDBC");
+            Connection con = null;
+            con = DriverManager.getConnection("jdbc:sqlite:KADAI1DB");
+            PreparedStatement ps = con.prepareStatement("delete from wordlist");
+            ps.executeUpdate();
+            
+            ps.close();
+            con.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void preSave(List<WordList> wlist){
+        
+    }
 
     public static void Save(List<WordList> wlist){
+        Collections.sort(wlist);
+        for(int i=0; i<wlist.size(); i++){
+            if(wlist.get(i).id != i+1)
+                wlist.get(i).id = i+1;
+        }
+
         try{
             Class.forName("org.sqlite.JDBC");
             Connection con = null;
@@ -97,5 +121,4 @@ public class WordListDAO {
             e.printStackTrace();
         }
     }
-
 }

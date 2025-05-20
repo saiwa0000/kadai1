@@ -1,5 +1,5 @@
 
-public class WordList {
+public class WordList implements Comparable<WordList> {
     int id;
     String english;
     String japanese;
@@ -15,5 +15,10 @@ public class WordList {
 
     public void ToString(){
         System.out.printf("%d,%s,%s,%d\n",id,english,japanese,score);
+    }
+
+    @Override
+    public int compareTo(WordList s) {
+        return  this.id - s.id;
     }
 }
