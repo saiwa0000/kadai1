@@ -70,7 +70,7 @@ public class WordListDAO {
         }
     }
 
-    public static void AddList(List<WordList> wlist){
+    public static List<WordList> AddList(List<WordList> wlist){
         try{
             Class.forName("org.sqlite.JDBC");
             Connection con = null;
@@ -84,6 +84,7 @@ public class WordListDAO {
                         pstmt.setInt(1, wlist.get(i).id);
                     }else{
                         pstmt.setInt(1, maxID() + n);
+                        wlist.get(i).id = maxID() + n;
                         n++;
                     }
                     pstmt.setString(2, wlist.get(i).english);
@@ -98,11 +99,18 @@ public class WordListDAO {
         }catch(Exception e){
             e.printStackTrace();
         }
+        return wlist;
     }
 
     public static int maxID(){
         List<WordList> wlist = WordListDAO.findAll();
         int max = wlist.get(wlist.size()-1).id;
+
+        for(int i=0; i<wlist.size(); i++){
+            if(wlist.get(i).id > max)
+                max = wlist.get(i).id;
+        }
+
         return max;
     }
 
