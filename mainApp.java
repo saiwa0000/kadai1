@@ -7,7 +7,7 @@ public class mainApp {
         System.out.println("1 単語テスト");
         System.out.println("2 単語の追加・削除・編集");
         System.out.println("3 単語の検索");
-        System.out.println("4 戻る");
+        System.out.println("4 戻る"); 
 
         while (true) {
             //整数かどうかチェック
@@ -30,7 +30,7 @@ public class mainApp {
             case 1:
             break;
             case 2:
-            
+
             break;
             case 3:
             break;
