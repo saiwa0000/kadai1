@@ -5,7 +5,7 @@ import java.util.*;
 public class EditWord {
 
 
-    public static void selectMenu(List<WordList> wordList) {
+    public static void selectMenuUI(List<WordList> wordList) {
         Scanner scanner = new Scanner(System.in);
         while(true) {
             System.out.println("--------------------------------------");
@@ -33,6 +33,11 @@ public class EditWord {
         String english = scanner.nextLine();
         System.out.print("意味：");
         String japanese = scanner.nextLine();
+
+
+        // ==============================
+        //  書き換え処理: リストに英単語を追加
+        // ==============================
         wordList.add(new WordList(wordList.size()+1, english, japanese, 0));
         System.out.println(wordList.getLast().english + "が追加されました");
         
@@ -67,6 +72,12 @@ public class EditWord {
         System.out.println("----------------------------");
         System.out.println("本当に" + deletedEn + "を削除しますか");
         int option = SelectMenu.createUI("メニュー", scanner, "はい", "いいえ");
+
+
+
+        // ==============================
+        //  書き換え処理: リストから英単語削除
+        // ==============================
         switch (option) {
             case 1:
                 wordList.remove(deletedId-1);
@@ -111,6 +122,11 @@ public class EditWord {
         int editedEnId = SelectMenu.createUI(scanner, searchedList).id;
         System.out.println("----------------------------");
         int editMenu = SelectMenu.createUI("メニュー", scanner, "英単語を編集", "意味を編集", "どちらも編集");
+
+
+        // ==============================
+        //  書き換え処理: リストの英単語を編集
+        // ==============================
         switch (editMenu) {
             case 1:
                 System.out.print("編集後の英単語：");
