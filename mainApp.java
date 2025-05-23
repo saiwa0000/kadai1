@@ -17,7 +17,7 @@ public class MainApp {
             switch (option) {
                 case 1:
                     // 単語テスト処理...
-                    // Quiz.QuizExe(wl);
+                    Quiz.QuizExe(wl);
                     break;
                 case 2:
                     // 単語の追加・削除・編集...
