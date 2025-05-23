@@ -22,6 +22,7 @@ public class MainApp {
                 case 2:
                     // 単語の追加・削除・編集...
                     EditWord.selectMenuUI(wl);
+                    WordListDAO.SaveAll(wl);
                     System.out.println("2が呼ばれた");
                     break;
                 case 3:
