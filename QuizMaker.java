@@ -3,14 +3,14 @@ import java.util.random.RandomGenerator;
 import java.util.random.RandomGeneratorFactory;
 public class QuizMaker {
     
-    public static ArrayList<WordList> MakeQuiz(ArrayList<WordList> wl){
+    public static List<WordList> MakeQuiz(List<WordList> wl){
         Scanner scanner = new Scanner(System.in);
         System.out.println("出題方法は?");
         System.out.println("0:低いスコア優先 1:スコアを指定 2:ランダム");
         int num = scanner.nextInt();
         System.out.println("問題数は?");
         int size = scanner.nextInt();
-        ArrayList<WordList> returnlist = new ArrayList<>();
+        List<WordList> returnlist = new ArrayList<>();
         switch(num){
             case 0: returnlist = PrioritizeLowScore(wl, size); break;
             case 1: returnlist = SpecifyScore(wl, size); break;
@@ -21,9 +21,9 @@ public class QuizMaker {
         return returnlist;
     }
     //低いスコア優先で問題を作る関数
-    static ArrayList<WordList> PrioritizeLowScore(ArrayList<WordList> wl,int size){
-        ArrayList<WordList> list = new ArrayList<>(wl);
-        ArrayList<WordList> returnlist = new ArrayList<>();
+    static List<WordList> PrioritizeLowScore(List<WordList> wl,int size){
+        List<WordList> list = new ArrayList<>(wl);
+        List<WordList> returnlist = new ArrayList<>();
         if(list.size()>(size+5)){
             for(int i=0;i < size;i++){
                 //Random rand = new Random();
@@ -54,13 +54,13 @@ public class QuizMaker {
         return returnlist;
     }
     //スコアを指定
-    static ArrayList<WordList> SpecifyScore(ArrayList<WordList> wl,int size){
+    static List<WordList> SpecifyScore(List<WordList> wl,int size){
         Scanner scanner = new Scanner(System.in);
         System.out.println("どのスコアの問題を出題しますか？");
         int score = scanner.nextInt();
-        ArrayList<WordList> list = new ArrayList<>(SearchWord.byScore(wl,score));
+        List<WordList> list = new ArrayList<>(SearchWord.byScore(wl,score));
         
-        ArrayList<WordList> returnlist = new ArrayList<>();
+        List<WordList> returnlist = new ArrayList<>();
         if(list.size()>size){
             for(int i=0;i < size;i++){
                 Random rand = new Random();
@@ -78,9 +78,9 @@ public class QuizMaker {
         return returnlist;
     }
     //完全ランダム
-    static ArrayList<WordList> RandomMake(ArrayList<WordList> wl,int size){
-        ArrayList<WordList> list = new ArrayList<>(wl);
-        ArrayList<WordList> returnlist = new ArrayList<>();
+    static List<WordList> RandomMake(List<WordList> wl,int size){
+        List<WordList> list = new ArrayList<>(wl);
+        List<WordList> returnlist = new ArrayList<>();
         if(list.size()>size){
             for(int i=0;i < size;i++){
                 Random rand = new Random();

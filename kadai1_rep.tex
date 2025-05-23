@@ -1,0 +1,59 @@
+\documentclass{ltjsarticle}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{listings,jvlisting} %日本語のコメントアウトをする場合jvlisting（もしくはjlisting）が必要
+\usepackage{mathtools}
+\usepackage{adjustbox}
+%ここからソースコードの表示に関する設定
+\lstset{
+  language=java,
+  basicstyle={\ttfamily\footnotesize}
+  commentstyle={\smallitshape},
+  keywordstyle={\small\bfseries},
+  ndkeywordstyle={\small},
+  stringstyle={\small\ttfamily},
+  frame={tb},
+  breaklines=true,
+  columns=[l]{fullflexible},
+  numbers=left,
+  %xrightmargin=0zw,
+  %xleftmargin=3zw,
+  numberstyle={\scriptsize},
+  stepnumber=1,
+  %numbersep=1zw,
+  %lineskip=-0.5ex
+}
+\title{プログラミング技術　レポート}
+\author{35714031 \\ 小倉才和 \and 35714095 \\ 丹羽晴飛 \and 35714059 \\ 佐藤颯}
+
+
+\date{\empty}
+\begin{document}
+\maketitle
+\section{制作物の概要}
+データベースを用いて英単語の学習ツールを作成した。SQLのテーブルは、ID、英単語、意味、スコアの4つのカラムを持っている。プログラミングで実装した機能は以下の通りである。
+\begin{itemize}
+    \item 単語(テーブル)の追加、削除、編集
+    \item 条件を指定し、単語の検索
+    \item クイズの出題とスコアの変更
+\end{itemize}
+
+\section{プログラムの説明}
+以下では各クラスと関数の説明をする。
+\subsection{QuizMaker}
+このクラスは、データベースのリストから条件に応じてクイズ用のリストを作る役割を持つ。
+\subsubsection{MakeQuiz}
+標準入力によって関数を切り替えることにより、異なる条件でクイズ用のリストを生成する。
+\subsubsection{PrioritizeLowScore}
+低いスコアから優先で問題を生成する。ここではJava17から登場したjava.util.randomパッケージのRandomGeneratorインターフェースを用いている。これにより様々な乱数アルゴリズムを使うことができる。
+\subsubsection{SpecifyScore}
+引数で指定したスコアの問題のリストを生成する。
+\subsubsection{RandomMake}
+データベースのリストの中のすべての要素からランダムに選んで問題を生成する。
+
+\subsection{Quiz}
+このクラスは先のQuizMakerで生成したクイズのリストを用いて実際にクイズを出題し、スコアを変更する役割を持つ。
+\subsubsection{QuizExe}
+与えられた問題のリストを用いてクイズを出題し、正誤に応じてスコアを増減させる。スコア変更後の問題のリストを返す。
+
+
+\end{document}
