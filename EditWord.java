@@ -38,9 +38,7 @@ public class EditWord {
         // ==============================
         //  書き換え処理: リストに英単語を追加
         // ==============================
-        if(wordList.size()> 0) {
-            wordList.add(new WordList(wordList.size()+1, english, japanese, 0));
-        }
+        wordList.add(new WordList(wordList.size()+1, english, japanese, 0));
         
         System.out.println(wordList.get(wordList.size() - 1).english + "が追加されました");
         
