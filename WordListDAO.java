@@ -17,6 +17,7 @@ public class WordListDAO {
     public static List<WordList> findAll(){
         Connection con = null;
         List<WordList> list = new ArrayList<WordList>();
+        List<WordList> errorlist = new ArrayList<WordList>();
         try{
             Class.forName("org.sqlite.JDBC");
             
@@ -39,10 +40,10 @@ public class WordListDAO {
             con.close();
         }catch(SQLException e){
             e.printStackTrace();
-            return null;
+            return errorlist;
         }catch(ClassNotFoundException e){
             e.printStackTrace();
-            return null;
+            return errorlist;
         }
         return list;
     }
