@@ -39,6 +39,31 @@
 
 \section{プログラムの説明}
 以下では各クラスと関数の説明をする。
+\subsection{WordList}
+擬似的なテーブルとして振る舞う。フィールドとしてid、english、japanese、scoreを持ちそれぞれテーブルのカラムに対応する。さらに変更があったかどうかを示すisChangeも追加した。
+\subsection{WordListDAO}
+DAOパターンによってデータベースを操作する役割を持つ。
+\subsubsection{findAll}
+データベースのテーブルをリストに入れて、そのリストを返す。
+\subsubsection{Add}
+引数にidと英単語と意味を与えることによってデータベースに要素を追加する
+\subsubsection{AddList}
+引数にWordListのリストを与えることにより、データベースに存在しない要素があればそれを追加する。
+\subsubsection{maxID}
+データベースのテーブルのIDのうち、最も大きいものを返す
+\subsubsection{checkID}
+引数に入れたIDがデータベース内に存在するのであればtrueを返す。
+\subsubsection{checkList}
+引数のWordListがデータベース内に存在しないのであればtrueを返す。
+\subsubsection{Delete}
+指定したIDの要素を消してデータベースのIDを詰める
+\subsubsection{Sort}
+データベースをIDデソートしたうえでIDに空きがあれば詰める
+\subsubsection{SaveAll}
+データベースに引数のリストの要素を完全に保存する
+\subsubsection{Save}
+データベースにリストでの変更を適応させる
+
 \subsection{QuizMaker}
 このクラスは、データベースのリストから条件に応じてクイズ用のリストを作る役割を持つ。
 \subsubsection{MakeQuiz}
@@ -55,5 +80,21 @@
 \subsubsection{QuizExe}
 与えられた問題のリストを用いてクイズを出題し、正誤に応じてスコアを増減させる。スコア変更後の問題のリストを返す。
 
+\subsection{SearchWord}
+指定した範囲でデータベースの要素を検索する役割を持つ
+\subsubsection{byScore}
+引数に与えられたスコアと一致する要素をリストとして返す
+\subsubsection{byEnglish}
+引数に与えられた英単語の文字列が最初の数文字と一致するデータベースの要素を返す
+\subsubsection{byJapanese}
+引数に与えられた日本語の文字列が最初の数文字と一致するデータベースの要素を返す
+\subsubsection{selectMenuUI}
+どの範囲で検索するかをユーザーが指定できるようにするためのUIを表示する
+\subsubsection{selectWordUI}
+検索する文字をユーザーが入力できるようにするためのUIを表示する
 
+\subsection{EditWord}
+このクラスではデータベースを実際にユーザーが操作するための機能やUIをサポートする
+\subsubsection{selectMenuUI}
+データベースに
 \end{document}

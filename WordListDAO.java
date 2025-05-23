@@ -125,11 +125,11 @@ public class WordListDAO {
         for(int i=0; i<wlist.size(); i++){
             int count = 0;
             if(wlist.get(i).id == w.id)
-                count++;
-            else if(wlist.get(i).english.equals(w.english))
-                count++;
-            else if(wlist.get(i).japanese.equals(w.japanese))
-                count++;
+                count += 1;
+            if(wlist.get(i).english.equals(w.english))
+                count += 1;
+            if(wlist.get(i).japanese.equals(w.japanese))
+                count += 1;
             if(count > 1)
                 return false;
         }
@@ -211,28 +211,16 @@ public class WordListDAO {
             Connection con = null;
             con = DriverManager.getConnection("jdbc:sqlite:KADAI1DB");
             for(int i=0; i<wlist.size(); i++){
-                PreparedStatement pstmt = con.prepareStatement("update wordlist set english=? where id=?");
-                pstmt.setString(1, wlist.get(i).english);
-                pstmt.setInt(2, wlist.get(i).id);
-                pstmt.executeUpdate();
+                if(wlist.get(i).isChange){
+                    PreparedStatement pstmt = con.prepareStatement("update wordlist set english=?, japanese=?, score=? where id=?");
+                    pstmt.setString(1, wlist.get(i).english);
+                    pstmt.setString(2, wlist.get(i).japanese);
+                    pstmt.setInt(3, wlist.get(i).score);
+                    pstmt.setInt(4, wlist.get(i).id);
+                    pstmt.executeUpdate();
             
-                pstmt.close();
-            }
-            for(int i=0; i<wlist.size(); i++){
-                PreparedStatement pstmt = con.prepareStatement("update wordlist set japanese=? where id=?");
-                pstmt.setString(1, wlist.get(i).japanese);
-                pstmt.setInt(2, wlist.get(i).id);
-                pstmt.executeUpdate();
-            
-                pstmt.close();
-            }
-            for(int i=0; i<wlist.size(); i++){
-                PreparedStatement pstmt = con.prepareStatement("update wordlist set score=? where id=?");
-                pstmt.setInt(1, wlist.get(i).score);
-                pstmt.setInt(2, wlist.get(i).id);
-                pstmt.executeUpdate();
-            
-                pstmt.close();
+                    pstmt.close();
+                }
             }
 
             con.close();
