@@ -47,6 +47,8 @@ public class WordListDAOTest {
         }
 
         System.out.println("1");
+
+        //WordListDAO.DeleteAll();
     }
 
     
