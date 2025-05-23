@@ -199,8 +199,8 @@ public class WordListDAO {
 
     //要素を追加したときの保存
     public static void SaveAll(List<WordList> wlist){
-        AddList(wlist);
-        Save(wlist);
+        List<WordList> wlist2 = AddList(wlist);
+        Save(wlist2);
         Sort();
     }
 
