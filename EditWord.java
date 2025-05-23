@@ -42,7 +42,7 @@ public class EditWord {
             wordList.add(new WordList(wordList.size()+1, english, japanese, 0));
         }
         
-        System.out.println(wordList.getLast().english + "が追加されました");
+        System.out.println(wordList.get(wordList.size() - 1).english + "が追加されました");
         
     }
     public static void DeleteFormList(List<WordList> wordList) {
