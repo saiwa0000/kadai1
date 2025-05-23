@@ -20,11 +20,13 @@ public class Quiz {
                 System.out.println("正解！");
                 if(wl.score<5){
                     wl.score++;
+                    wl.isChange=true;
                 }
             }else{
                 System.out.println("不正解...");
                 if(wl.score>-5){
                     wl.score--;
+                    wl.isChange=true;
                 }
             }
             result.add(wl);
