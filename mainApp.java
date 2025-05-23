@@ -18,6 +18,7 @@ public class MainApp {
                 case 1:
                     // 単語テスト処理...
                     Quiz.QuizExe(wl);
+                    WordListDAO.SaveAll(wl);
                     break;
                 case 2:
                     // 単語の追加・削除・編集...
