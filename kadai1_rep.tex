@@ -65,14 +65,16 @@ DAOパターンによってデータベースを操作する役割を持つ。
 データベースにリストでの変更を適応させる
 
 \subsection{QuizMaker}
-このクラスは、データベースのリストから条件に応じてクイズ用のリストを作る役割を持つ。
+このクラスは、データベースのリストから条件に応じてクイズ用のリストを作る役割を持つ。QuizMakerStateというStateパターンを用いて実装した
 \subsubsection{MakeQuiz}
-標準入力によって関数を切り替えることにより、異なる条件でクイズ用のリストを生成する。
-\subsubsection{PrioritizeLowScore}
+標準入力によってStateを切り替えることにより、異なる条件でクイズ用のリストを生成する。
+\subsubsection{SetState}
+現在のStateを切り替える。
+\subsubsection{PrioritizeLowScoreState}
 低いスコアから優先で問題を生成する。ここではJava17から登場したjava.util.randomパッケージのRandomGeneratorインターフェースを用いている。これにより様々な乱数アルゴリズムを使うことができる。
-\subsubsection{SpecifyScore}
+\subsubsection{SpecifyScoreState}
 引数で指定したスコアの問題のリストを生成する。
-\subsubsection{RandomMake}
+\subsubsection{RandomMakeState}
 データベースのリストの中のすべての要素からランダムに選んで問題を生成する。
 
 \subsection{Quiz}
@@ -81,7 +83,7 @@ DAOパターンによってデータベースを操作する役割を持つ。
 与えられた問題のリストを用いてクイズを出題し、正誤に応じてスコアを増減させる。スコア変更後の問題のリストを返す。
 
 \subsection{SearchWord}
-指定した範囲でデータベースの要素を検索する役割を持つ
+指定した範囲でデータベースの要素を検索する役割を持つ。このクラスのテストクラスではJunitを用いた。ß
 \subsubsection{byScore}
 引数に与えられたスコアと一致する要素をリストとして返す
 \subsubsection{byEnglish}
