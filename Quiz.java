@@ -7,7 +7,8 @@ public class Quiz {
         
         Scanner scanner = new Scanner(System.in);
         List<WordList> result = new ArrayList<>();
-        List<WordList> quiz = QuizMaker.MakeQuiz(list);
+        QuizMaker quizMaker = new QuizMaker();
+        List<WordList> quiz = quizMaker.Make(list);
         
         if(quiz == null){return list;}    
         
@@ -30,7 +31,7 @@ public class Quiz {
                 }
             }
             result.add(wl);
-        }
+        } 
         System.out.println("クイズおわり");
         return result;
     }
